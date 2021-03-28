@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ff583b">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.example.mapwithmarker.MapsMarkerActivity"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="10dp"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_light_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="#ff583b">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama :"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/cardview_light_background"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp" />
+                <TextView
+                    android:id="@+id/edt_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="sample"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/cardview_light_background"
+                    app:layout_constraintTop_toTopOf="@id/name"
+                    app:layout_constraintStart_toEndOf="@id/name"
+                    android:layout_marginStart="5dp"/>
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alamat :"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/cardview_light_background"
+                    app:layout_constraintTop_toBottomOf="@id/name"
+                    app:layout_constraintStart_toStartOf="@id/name"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:id="@+id/edt_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="sample"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/cardview_light_background"
+                    app:layout_constraintTop_toTopOf="@id/address"
+                    app:layout_constraintStart_toEndOf="@id/address"
+                    android:layout_marginStart="5dp"/>
+
+                <TextView
+                    android:id="@+id/hour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jam Operasi :"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/cardview_light_background"
+                    app:layout_constraintTop_toBottomOf="@id/address"
+                    app:layout_constraintStart_toStartOf="@id/address"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:id="@+id/edt_hour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="sample"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/cardview_light_background"
+                    app:layout_constraintTop_toTopOf="@id/hour"
+                    app:layout_constraintStart_toEndOf="@id/hour"
+                    android:layout_marginStart="5dp"/>
+
+                <TextView
+                    android:id="@+id/desctiption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deskripsi :"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/cardview_light_background"
+                    app:layout_constraintTop_toBottomOf="@id/hour"
+                    app:layout_constraintStart_toStartOf="@id/hour"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:id="@+id/edt_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="sample"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/cardview_light_background"
+                    app:layout_constraintTop_toTopOf="@id/desctiption"
+                    app:layout_constraintStart_toEndOf="@id/desctiption"
+                    android:layout_marginStart="5dp"/>
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Detail Harga :"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/cardview_light_background"
+                    app:layout_constraintTop_toBottomOf="@id/edt_description"
+                    app:layout_constraintStart_toStartOf="@id/desctiption"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/edt_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="sans-serif"
+                    android:text="sample"
+                    android:textColor="@color/cardview_light_background"
+                    app:layout_constraintStart_toEndOf="@id/price"
+                    app:layout_constraintTop_toTopOf="@id/price" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_booking"
+                    android:layout_width="150dp"
+                    android:layout_height="45dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/rounded_corners"
+                    android:drawableRight="@drawable/ic_right_arrow"
+                    android:fontFamily="sans-serif"
+                    android:paddingRight="10dp"
+                    android:text="Booking"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edt_price"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="10dp"
+                    app:layout_goneMarginBottom="10dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

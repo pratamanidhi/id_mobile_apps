@@ -1,6 +1,7 @@
-package com.tugas_akhir.tambal_ban.Account
+package com.tugas_akhir.tambal_ban.Activity.Account
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import com.android.volley.toolbox.Volley
 import com.tugas_akhir.tambal_ban.API.Endpoints
 import com.tugas_akhir.tambal_ban.R
 import kotlinx.android.synthetic.main.activity_register.*
+import org.json.JSONException
 import org.json.JSONObject
 
 class RegisterActivity : AppCompatActivity() {
@@ -21,6 +23,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         context = this
+        this.supportActionBar?.hide()
         btn_register.setOnClickListener { registerAction() }
     }
 
@@ -28,7 +31,15 @@ class RegisterActivity : AppCompatActivity() {
         val username = edt_username.text.toString().trim()
         val password = edt_password.text.toString().trim()
         val namauser = edt_namaUser.text.toString().trim()
-        register(username, password, namauser)
+        if (username.isEmpty()){
+            edt_username.error = getString(R.string.error)
+        }else if (password.isEmpty()){
+            edt_password.error = getString(R.string.error)
+        }else if (namauser.isEmpty()){
+            edt_namaUser.error = getString(R.string.error)
+        }else{
+            register(username, password, namauser)
+        }
     }
 
     fun register(username : String, password : String, namaUser : String){
@@ -43,7 +54,11 @@ class RegisterActivity : AppCompatActivity() {
         val que = Volley.newRequestQueue(this)
         val req = JsonObjectRequest(Request.Method.POST, Endpoints.register, jsonObject, Response.Listener {
             response ->
-            Log.e("mess", response.toString())
+            try {
+                startActivity(Intent(this, LoginActivity::class.java))
+            }catch ( e : JSONException){
+                Log.e("error", e.toString())
+            }
         }, Response.ErrorListener {
             error ->
             Log.e("Error", error.toString())
