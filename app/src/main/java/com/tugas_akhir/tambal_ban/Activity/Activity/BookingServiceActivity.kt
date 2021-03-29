@@ -3,6 +3,7 @@ package com.tugas_akhir.tambal_ban.Activity.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
@@ -11,6 +12,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.tugas_akhir.tambal_ban.API.Endpoints
+import com.tugas_akhir.tambal_ban.Activity.Account.LoginActivity
 import com.tugas_akhir.tambal_ban.R
 import com.tugas_akhir.tambal_ban.Util.Collection.Companion.showCalendar
 import com.tugas_akhir.tambal_ban.Util.Collection.Companion.showTimePicker
@@ -22,6 +24,10 @@ import java.util.*
 
 class BookingServiceActivity : AppCompatActivity(){
     lateinit var context: Context
+    lateinit var shp : SharedPreferences
+    lateinit var shpEditor: SharedPreferences.Editor
+    val login = LoginActivity()
+    lateinit var cst_id : String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +40,14 @@ class BookingServiceActivity : AppCompatActivity(){
 
         val id = intent.getStringExtra("id")
         Log.e("mess", id)
+
+        shp = this.getSharedPreferences(login.my_shared_preferences, Context.MODE_PRIVATE)
+        cst_id = shp.getString("cst_id", login.cst_id).toString()
+        Log.e("id", cst_id)
+        getUser(cst_id)
+        btn_book_service.setOnClickListener {
+            data(cst_id, id)
+        }
     }
 
     private fun pickedDate(){
@@ -54,13 +68,13 @@ class BookingServiceActivity : AppCompatActivity(){
         }
     }
 
-    private fun data(){
+    private fun data( user_id : String, service_id : String){
         val name = edt_username.text.toString()
         val date = edt_date.text.toString()
         val time = edt_time.text.toString()
         val type = edt_type.text.toString()
         val request = edt_request.text.toString()
-        bookingData("1", "1", name, date, time, type,request)
+        bookingData(user_id, service_id, name, date, time, type,request)
     }
 
     private fun bookingData(
@@ -99,6 +113,22 @@ class BookingServiceActivity : AppCompatActivity(){
         })
         que.add(req)
 
+    }
+
+    private fun getUser(id : String){
+        val que = Volley.newRequestQueue(this)
+        val req = JsonObjectRequest(Request.Method.GET, Endpoints.getUserDetail+id, null, {
+            response ->
+            try {
+                val name = response.getString("namauser")
+                edt_username.setText(name)
+            }catch (e : JSONException){
+
+            }
+        }, {
+            error ->
+        })
+        que.add(req)
     }
 
 }

@@ -33,29 +33,29 @@ class HomePage : AppCompatActivity() {
         context = this
         this.supportActionBar?.hide()
         getListOfTB()
-//        shp = this.getSharedPreferences(login.my_shared_preferences, Context.MODE_PRIVATE)
-//        isLogout()
+        shp = this.getSharedPreferences(login.my_shared_preferences, Context.MODE_PRIVATE)
+        isLogout()
     }
 
 
-//    fun isLogout(){
-//        btn_logout.setOnClickListener {
-//            clearSession()
-//        }
-//    }
-//
-//    fun clearSession(){
-//        shpEditor = shp.edit()
-//        shpEditor.putBoolean(login.sessionStatus, false)
-//        shpEditor.commit()
-//        val intent = Intent(this, LoginActivity::class.java)
-//        startActivity(intent)
-//        finish()
-//    }
+    fun isLogout(){
+        btn_logout.setOnClickListener {
+            clearSession()
+        }
+    }
+
+    fun clearSession(){
+        shpEditor = shp.edit()
+        shpEditor.putBoolean(login.sessionStatus, false)
+        shpEditor.commit()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 
     fun getListOfTB(){
         val que = Volley.newRequestQueue(this)
-        val req = JsonObjectRequest(Request.Method.GET,Endpoints.getListData, null, Response.Listener {
+        val req = JsonObjectRequest(Request.Method.GET,Endpoints.getListData, null, {
             response ->
             try {
                 val body = response.getJSONArray("body")
@@ -86,7 +86,7 @@ class HomePage : AppCompatActivity() {
             }catch (e : JSONException){
                 e.printStackTrace()
             }
-        }, Response.ErrorListener {
+        }, {
             error ->
         })
         que.add(req)
