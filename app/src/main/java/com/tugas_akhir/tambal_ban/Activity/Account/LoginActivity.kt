@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.tugas_akhir.tambal_ban.API.Endpoints
@@ -67,15 +68,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun login(username : String, password : String){
+        val obj = JSONObject()
+        obj.put("username", username)
+        obj.put("password", password)
+
         val que = Volley.newRequestQueue(this)
-        val req = object : StringRequest(Request.Method.POST,Endpoints.login, Response.Listener {
+        val req = JsonObjectRequest(Request.Method.POST,Endpoints.USER_LOGIN, obj,{
             response ->
             try {
-                val jsonObj = JSONObject(response)
-                val loginMessage = jsonObj.getString("message")
-                if (loginMessage=="Login successfull"){
-                    val user = jsonObj.getJSONObject("user")
-                    cst_id = user.getInt("id").toString()
+                    cst_id = response.getInt("id_user").toString()
                     shpEditor = shp.edit()
                     shpEditor.putBoolean(sessionStatus,true)
                     shpEditor.putString(TAG_CST_ID, cst_id)
@@ -84,26 +85,15 @@ class LoginActivity : AppCompatActivity() {
                     intent.putExtra(TAG_CST_ID, cst_id)
                     startActivity(intent)
                     finish()
-                }else{
-                    Toast.makeText(this, "Login Gagal", Toast.LENGTH_LONG).show()
-                }
             }catch (e : JSONException){
                 Log.e("ERROR", e.toString())
+                Toast.makeText(this, "Username atau Password anda salah", Toast.LENGTH_LONG).show()
             }
-        }, Response.ErrorListener {
+        },{
             error ->
             Log.e("error", error.toString())
-        }){
-            override fun getBodyContentType(): String {
-                return "application/x-www-form-urlencoded; charset=UTF-8"
-            }
-            override fun getParams(): Map<String, String> {
-                val params = HashMap<String, String>()
-                params.put("username", username)
-                params.put("password", password)
-                return params
-            }
-        }
+            Toast.makeText(this, "Username atau Password anda salah", Toast.LENGTH_LONG).show()
+        })
         que.add(req)
     }
 }

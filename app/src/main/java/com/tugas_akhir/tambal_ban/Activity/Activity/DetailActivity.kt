@@ -52,7 +52,7 @@ class DetailActivity : AppCompatActivity(), OnMapReadyCallback {
         val id = intent.getStringExtra("id")
         val lat = intent.getStringExtra("latitude")
         val lng = intent.getStringExtra("longitude")
-        Log.e("mess", lat +"/"+lng)
+        Log.e("mess", id + "/" +lat +"/"+lng)
         getDetail(id)
 
         btn_booking.setOnClickListener {
@@ -65,7 +65,7 @@ class DetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun getDetail(id : String){
         val que = Volley.newRequestQueue(this)
-        val req = JsonObjectRequest(Request.Method.GET, Endpoints.getListDetail+id, null, {
+        val req = JsonObjectRequest(Request.Method.GET, Endpoints.PRODUCT_DETAIL+id, null, {
             response ->
             try {
                 Log.e("mess", response.toString())

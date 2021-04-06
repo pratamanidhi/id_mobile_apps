@@ -100,7 +100,7 @@ class BookingServiceActivity : AppCompatActivity(){
     private fun bookService(obj : JSONObject){
 
         val que = Volley.newRequestQueue(this)
-        val req = JsonObjectRequest(Request.Method.POST, Endpoints.bookService, obj,{
+        val req = JsonObjectRequest(Request.Method.POST, Endpoints.USER_BOOKING, obj,{
            response ->
            try {
                Log.e("mess", response.toString())
@@ -117,7 +117,7 @@ class BookingServiceActivity : AppCompatActivity(){
 
     private fun getUser(id : String){
         val que = Volley.newRequestQueue(this)
-        val req = JsonObjectRequest(Request.Method.GET, Endpoints.getUserDetail+id, null, {
+        val req = JsonObjectRequest(Request.Method.GET, Endpoints.USER_DETAIL+id, null, {
             response ->
             try {
                 val name = response.getString("namauser")
