@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.Response
@@ -52,15 +53,18 @@ class RegisterActivity : AppCompatActivity() {
 
     fun registerForm(jsonObject: JSONObject){
         val que = Volley.newRequestQueue(this)
-        val req = JsonObjectRequest(Request.Method.POST, Endpoints.register, jsonObject, Response.Listener {
+        val req = JsonObjectRequest(Request.Method.POST, Endpoints.USER_REGISTER, jsonObject, {
             response ->
             try {
+                Toast.makeText(this, "Akun anda sudah berhasil dibuat", Toast.LENGTH_LONG).show()
                 startActivity(Intent(this, LoginActivity::class.java))
             }catch ( e : JSONException){
+                Toast.makeText(this, "Username atau Password anda salah", Toast.LENGTH_LONG).show()
                 Log.e("error", e.toString())
             }
-        }, Response.ErrorListener {
+        }, {
             error ->
+            Toast.makeText(this, "Username atau Password anda salah", Toast.LENGTH_LONG).show()
             Log.e("Error", error.toString())
         })
         que.add(req)

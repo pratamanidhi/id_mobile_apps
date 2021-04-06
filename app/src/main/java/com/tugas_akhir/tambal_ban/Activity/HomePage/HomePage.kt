@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.tugas_akhir.tambal_ban.API.Endpoints
@@ -32,9 +33,9 @@ class HomePage : AppCompatActivity() {
         setContentView(R.layout.activity_home_page)
         context = this
         this.supportActionBar?.hide()
-        getListOfTB()
         shp = this.getSharedPreferences(login.my_shared_preferences, Context.MODE_PRIVATE)
         isLogout()
+        getProduct()
     }
 
 
@@ -53,14 +54,13 @@ class HomePage : AppCompatActivity() {
         finish()
     }
 
-    fun getListOfTB(){
+    fun getProduct(){
         val que = Volley.newRequestQueue(this)
-        val req = JsonObjectRequest(Request.Method.GET,Endpoints.getListData, null, {
+        val req = JsonArrayRequest(Request.Method.GET, Endpoints.PRODUCT_LIST, null, {
             response ->
             try {
-                val body = response.getJSONArray("body")
-                for (i in 0 until body.length()){
-                    val item = body.getJSONObject(i)
+                for (i in 0 until response.length()){
+                    val item = response.getJSONObject(i)
                     val id = item.getString("id_tambal_ban")
                     val name = item.getString("nama_tambal_ban")
                     val addess = item.getString("alamat")
@@ -84,10 +84,11 @@ class HomePage : AppCompatActivity() {
                     rv_orders.adapter = adapter
                 }
             }catch (e : JSONException){
-                e.printStackTrace()
+                Log.e("ERROR", e.toString())
             }
-        }, {
+        },{
             error ->
+            Log.e("ERROR", error.toString())
         })
         que.add(req)
     }

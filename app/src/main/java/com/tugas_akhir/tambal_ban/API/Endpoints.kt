@@ -1,22 +1,20 @@
 package com.tugas_akhir.tambal_ban.API
 
 object Endpoints {
+    //==================================== NEW ENDPOINT =========================//
+    val URL_ROOT = "http://192.168.1.9:5000"
 
-    // BASE SERVICE URL
-    private val basedURL = "http://192.168.1.10/Tambal%20Ban/"
-
-
-    // ACCOUNT MANAGEMENT
-    val login = basedURL + "Login/Api.php?apicall=login"
-    val register = basedURL + "Register/create_register.php"
-    val getUserDetail = basedURL + "Register/getSingle.php/?id="
+    //==================================== USER MANAGEMENT =========================//
+    val USER_LOGIN = URL_ROOT+"/user/login"
+    val USER_DETAIL = URL_ROOT+"/user/"
+    val USER_REGISTER = URL_ROOT+"/user"
 
 
-    // SERVICE MANAGEMENT
-    val getListData = basedURL + "List%20TB/read_listTB.php"
-    val getListDetail = basedURL + "List%20TB/getSingle.php/?id="
+    //==================================== PRODUCT MANAGEMENT =========================//
+    val PRODUCT_LIST = URL_ROOT + "/products"
+    val PRODUCT_DETAIL = URL_ROOT + "/products/"
 
+    //==================================== BOOKING MANAGEMENT =========================//
+    val USER_BOOKING = URL_ROOT + "/booking"
 
-    //BOOKING MANAGEMENT
-    val bookService = basedURL + "Booking/creat_booking.php"
 }
