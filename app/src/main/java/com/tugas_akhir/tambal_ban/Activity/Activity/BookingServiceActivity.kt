@@ -3,6 +3,7 @@ package com.tugas_akhir.tambal_ban.Activity.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.tugas_akhir.tambal_ban.API.Endpoints
 import com.tugas_akhir.tambal_ban.Activity.Account.LoginActivity
+import com.tugas_akhir.tambal_ban.Activity.HomePage.HomePage
 import com.tugas_akhir.tambal_ban.R
 import com.tugas_akhir.tambal_ban.Util.Collection.Companion.showCalendar
 import com.tugas_akhir.tambal_ban.Util.Collection.Companion.showTimePicker
@@ -104,6 +106,7 @@ class BookingServiceActivity : AppCompatActivity(){
            response ->
            try {
                Log.e("mess", response.toString())
+               startActivity(Intent(this, HomePage::class.java))
            } catch (e : JSONException){
                Log.e("ERROR", e.toString())
            }
